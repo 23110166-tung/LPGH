@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chúc Mừng 8/3 ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+    text-align:center;
+}
+
+/* LOGIN */
+#loginBox{
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 0 40px rgba(255,105,180,0.4);
+}
+
+input{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-top:15px;
+    width:230px;
+}
+
+button{
+    padding:10px 25px;
+    border:none;
+    border-radius:10px;
+    margin-top:15px;
+    cursor:pointer;
+    background:white;
+    color:#ff4b6e;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* CARD */
+#card{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    animation:zoomIn 1.5s ease forwards;
+}
+
+@keyframes zoomIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+img{
+    width:230px;
+    border-radius:20px;
+    margin:20px 0;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+#message{
+    font-size:20px;
+    max-width:650px;
+    min-height:120px;
+    line-height:1.6;
+}
+
+#days{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* HEART */
+.heart{
+    position:fixed;
+    top:-10px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div id="loginBox">
+    <h2>Nhập mật khẩu của chúng ta 💌</h2>
+    <input type="password" id="password" placeholder="08032025">
+    <br>
+    <button onclick="checkPassword()">Mở thư</button>
+</div>
+
+<div id="card">
+    <h1>Chúc Mừng 8/3 Em Yêu ❤️</h1>
+
+    <img src="yourimage.jpg">
+
+    <div id="message"></div>
+
+    <div id="days"></div>
+</div>
+
+<audio id="music" loop>
+    <source src="hengapemduoianhtrang.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+function checkPassword(){
+    let pass=document.getElementById("password").value;
+    if(pass==="08032026"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("card").style.display="flex";
+        document.getElementById("music").play();
+        typeWriter();
+        calculateDays();
+        createHearts();
+    }else{
+        alert("Sai rồi bé ơi 😝");
+    }
+}
+
+let text="Từ ngày 08/03/2025, cuộc đời anh có thêm một phép màu mang tên em. Cảm ơn em vì đã xuất hiện và yêu anh. Chúc em 8/3 thật hạnh phúc, luôn xinh đẹp và mãi ở bên anh nhé ❤️";
+let i=0;
+
+function typeWriter(){
+    if(i<text.length){
+        document.getElementById("message").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeWriter,40);
+    }
+}
+
+function calculateDays(){
+    let startDate=new Date("2025-03-08");
+    let today=new Date();
+    let diff=today-startDate;
+    let days=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("days").innerHTML=
+    "Chúng ta đã bên nhau được "+days+" ngày ❤️";
+}
+
+function createHearts(){
+    setInterval(()=>{
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*25+15)+"px";
+        heart.style.animationDuration=(Math.random()*3+5)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>{heart.remove()},8000);
+    },500);
+}
+
+</script>
+
+</body>
+</html>
